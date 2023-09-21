@@ -12,8 +12,8 @@ void ss_env(string *args)
 	(void)args;
 	for (i = 0; environ[i] != NULL; i++)
 	{
-		print(environ[i]);
-		print("\n");
+		print(1, environ[i]);
+		print(1, "\n");
 	}
 }
 

@@ -1,7 +1,12 @@
 #include "main.h"
 
+List history;
+
 int main(int argc, string argv[])
 {
+	history.head = NULL;
+	history.count = 0;
+
 	if (argc > 1)
 	{
 		printf("Command: %s\n", argv[1]);

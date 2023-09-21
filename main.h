@@ -17,6 +17,18 @@ typedef char *string;
 typedef int bool;
 typedef void (*Builtin)(string *);
 
+typedef struct Node
+{
+	string data;
+	struct Node *next;
+} Node;
+
+typedef struct List
+{
+	Node *head;
+	int count;
+} List;
+
 typedef struct BuiltinCmds
 {
 	string cmd;
@@ -24,10 +36,16 @@ typedef struct BuiltinCmds
 } BuiltinCmds;
 
 extern char **environ;
+extern List history;
 
-void print(string str);
+void print(int fd, string str);
 
 void prompt(void);
+
+Node *createNode(string data);
+List *createList(void);
+void shift(List *list, string data);
+void printl(List *list);
 
 void loop(int argc, string argv[]);
 void nonterminal(string line, string argv[]);
@@ -44,6 +62,8 @@ void ss_exit(string *args);
 void ss_env(string *args);
 void ss_clear(string *args);
 void ss_setenv(string *args);
+
+string one(string name, string arg);
 
 int _strlen(const char *s);
 int _strcmp(char *s1, char *s2);

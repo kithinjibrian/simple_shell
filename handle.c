@@ -11,6 +11,7 @@ void handle(int num_commands, string *args, string argv[])
 		{
 			int a;
 			string *s = split(&a, snn[y], " ");
+			shift(&history, snn[y]);
 			result = execute(s, argv);
 			if (y < nn - 1)
 			{

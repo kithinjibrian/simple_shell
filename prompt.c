@@ -2,5 +2,5 @@
 
 void prompt(void)
 {
-	print("$ ");
+	print(1, "$ ");
 }

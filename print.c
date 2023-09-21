@@ -1,16 +1,16 @@
 #include "main.h"
 
-int _putchar(char c)
+int _putchar(int fd, char c)
 {
-	return (write(1, &c, 1));
+	return (write(fd, &c, 1));
 }
 
-void print(string str)
+void print(int fd, string str)
 {
 	int i;
 
 	for (i = 0; str[i] != '\0'; i++)
 	{
-		_putchar(str[i]);
+		_putchar(fd, str[i]);
 	}
 }

@@ -14,13 +14,13 @@ int run(string *args, string argv[])
 		{
 			if (execve(command, args, environ) == -1)
 			{
-				perror(argv[0]);
+				printf("SeaShell");
 				return (false);
 			}
 		}
 		else if (pid < 0)
 		{
-			perror(argv[0]);
+			printf("SeaShell");
 			return (false);
 		}
 		else
@@ -32,6 +32,6 @@ int run(string *args, string argv[])
 		}
 		return (true);
 	}
-	perror(argv[0]);
+	print(STDERR_FILENO, one(argv[0], args[0]));
 	return (false);
 }
