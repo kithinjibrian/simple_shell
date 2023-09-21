@@ -13,6 +13,7 @@ void loop(int argc, string argv[])
 	do
 	{
 		int i, y;
+		prompt();
 		line = _getline();
 		args = split(&num_commands, line, ";");
 
@@ -27,14 +28,14 @@ void loop(int argc, string argv[])
 				result = execute(s);
 				if (y < nn - 1)
 				{
-					if (strstr(args[i], "&&") != NULL)
+					if (_strstr(args[i], "&&") != NULL)
 					{
 						if (result != true)
 						{
 							break;
 						}
 					}
-					else if (strstr(args[i], "||") != NULL)
+					else if (_strstr(args[i], "||") != NULL)
 					{
 						if (result)
 						{

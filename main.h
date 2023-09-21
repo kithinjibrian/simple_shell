@@ -7,7 +7,6 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 #define DELIMITER " \t\r\n\a"
 #define BUFFER_SIZE 1024
@@ -28,6 +27,8 @@ extern char **environ;
 
 void print(string str);
 
+void prompt(void);
+
 void loop(int argc, string argv[]);
 string _getline(void);
 string *split(int *num_commands, string line, string delimeter);
@@ -41,5 +42,15 @@ void ss_exit(string *args);
 void ss_env(string *args);
 void ss_clear(string *args);
 void ss_setenv(string *args);
+
+int _strlen(const char *s);
+int _strcmp(char *s1, char *s2);
+string _strstr(const char *haystack, const char *needle);
+int _strncmp(const char *str1, const char *str2, size_t n);
+string _strcpy(char *dest, const char *src);
+char *_strcat(char *dest, const char *src);
+char *_strchr(const char *str, char character);
+string _strtok(char *str, const char *delim);
+char *_strdup(const char *str);
 
 #endif

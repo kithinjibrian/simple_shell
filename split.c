@@ -34,7 +34,7 @@ char **str_tok(const char *input, const char *delimiters, int *tokenCount)
 			if (inToken)
 			{
 				token[tokenIndex] = '\0';
-				tokens[(*tokenCount)++] = strdup(token);
+				tokens[(*tokenCount)++] = _strdup(token);
 				if (*tokenCount == tokenCapacity)
 				{
 					tokenCapacity *= 2;
@@ -58,7 +58,7 @@ char **str_tok(const char *input, const char *delimiters, int *tokenCount)
 	if (inToken)
 	{
 		token[tokenIndex] = '\0';
-		tokens[(*tokenCount)++] = strdup(token);
+		tokens[(*tokenCount)++] = _strdup(token);
 	}
 
 	return tokens;

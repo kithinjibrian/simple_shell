@@ -12,7 +12,7 @@ void (*builtins(string cmd))(string *)
 
 	while (builtincmds[i].cmd)
 	{
-		if (strcmp(builtincmds[i].cmd, cmd) == 0)
+		if (_strcmp(builtincmds[i].cmd, cmd) == 0)
 		{
 			break;
 		}
