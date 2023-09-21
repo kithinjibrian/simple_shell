@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -pedantic -std=gnu89
+CFLAGS = -g -Wall -Werror -Wextra -pedantic -std=gnu89
 LDFLAGS = -ll -lpthread
 
 SRC_DIR = .

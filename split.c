@@ -1,70 +1,81 @@
 #include "main.h"
 
-bool isDelimiter(char c, const char *delimeters)
+int token_len(char *str, char *delim)
 {
-	while (*delimeters)
+	int index = 0, len = 0;
+
+	while (*(str + index) && *(str + index) != *delim)
 	{
-		if (c == *delimeters)
-			return true;
-		delimeters++;
+		len++;
+		index++;
 	}
-	return false;
+
+	return (len);
 }
 
-char **str_tok(const char *input, const char *delimiters, int *tokenCount)
+int count_tokens(char *str, char *delim)
 {
-	int tokenCapacity = 10;
-	bool inToken = false;
-	char token[100];
-	int tokenIndex = 0;
-	int i;
-	char **tokens = (char **)malloc(tokenCapacity * sizeof(char *));
+	int index, tokens = 0, len = 0;
 
-	*tokenCount = 0;
-	if (tokens == NULL)
-	{
-		perror("Memory allocation error");
-		exit(EXIT_FAILURE);
-	}
+	for (index = 0; *(str + index); index++)
+		len++;
 
-	for (i = 0; input[i] != '\0'; i++)
+	for (index = 0; index < len; index++)
 	{
-		if (isDelimiter(input[i], delimiters))
+		if (*(str + index) != *delim)
 		{
-			if (inToken)
-			{
-				token[tokenIndex] = '\0';
-				tokens[(*tokenCount)++] = _strdup(token);
-				if (*tokenCount == tokenCapacity)
-				{
-					tokenCapacity *= 2;
-					tokens = (char **)realloc(tokens, tokenCapacity * sizeof(char *));
-					if (tokens == NULL)
-					{
-						perror("Memory allocation error");
-						exit(EXIT_FAILURE);
-					}
-				}
-				tokenIndex = 0;
-				inToken = false;
-			}
-		}
-		else
-		{
-			token[tokenIndex++] = input[i];
-			inToken = true;
+			tokens++;
+			index += token_len(str + index, delim);
 		}
 	}
-	if (inToken)
-	{
-		token[tokenIndex] = '\0';
-		tokens[(*tokenCount)++] = _strdup(token);
-	}
 
-	return tokens;
+	return (tokens);
 }
 
-string *split(int *num_commands, string line, string delimeter)
+char **str_tok(char *line, char *delim)
 {
-	return str_tok(line, delimeter, num_commands);
+	char **ptr;
+	int index = 0, tokens, t, letters, l;
+
+	tokens = count_tokens(line, delim);
+	if (tokens == 0)
+		return (NULL);
+
+	ptr = malloc(sizeof(char *) * (tokens + 2));
+	if (!ptr)
+		return (NULL);
+
+	for (t = 0; t < tokens; t++)
+	{
+		while (line[index] == *delim)
+			index++;
+
+		letters = token_len(line + index, delim);
+
+		ptr[t] = malloc(sizeof(char) * (letters + 1));
+		if (!ptr[t])
+		{
+			for (index -= 1; index >= 0; index--)
+				free(ptr[index]);
+			free(ptr);
+			return (NULL);
+		}
+
+		for (l = 0; l < letters; l++)
+		{
+			ptr[t][l] = line[index];
+			index++;
+		}
+
+		ptr[t][l] = '\0';
+	}
+	ptr[t] = NULL;
+	ptr[t + 1] = NULL;
+
+	return (ptr);
+}
+
+string *split(string line, string delimeter)
+{
+	return str_tok(line, delimeter);
 }

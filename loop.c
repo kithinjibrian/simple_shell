@@ -3,17 +3,17 @@
 void loop(int argc, string argv[])
 {
 	bool status = true;
-	int num_commands;
 	string line;
 	string *args;
 	(void)argc;
+	(void)argv;
 
 	do
 	{
 		prompt();
 		line = _getline();
-		args = split(&num_commands, line, ";");
-		handle(num_commands, args, argv);
+		args = split(line, ";");
+		handle(args, argv);
 
 		free(line);
 		free(args);

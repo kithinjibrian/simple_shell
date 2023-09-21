@@ -1,16 +1,29 @@
 #include "main.h"
 
-void handle(int num_commands, string *args, string argv[])
+void handles(string *args, string argv[])
+{
+	int i;
+	(void)argv;
+	for (i = 0; args[i] != NULL; i++)
+	{
+		printf("Token: %s\n", args[i]);
+	}
+}
+
+void handle(string *args, string argv[])
 {
 	int i, y, result;
-	for (i = 0; i < num_commands; i++)
+	for (i = 0; args[i] != NULL; i++)
 	{
-		int nn;
-		string *snn = split(&nn, args[i], "&&||");
-		for (y = 0; y < nn; y++)
+		string *snn = split(args[i], "&&||");
+		for (y = 0; snn[y] != NULL; y++)
 		{
-			int a;
-			string *s = split(&a, snn[y], " ");
+			int nn = 0;
+			string *s = split(snn[y], " ");
+			while (s[nn] != NULL)
+			{
+				nn++;
+			}
 			shift(&history, snn[y]);
 			result = execute(s, argv);
 			if (y < nn - 1)

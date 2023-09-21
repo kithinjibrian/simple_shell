@@ -50,8 +50,8 @@ void printl(List *list);
 void loop(int argc, string argv[]);
 void nonterminal(string line, string argv[]);
 string _getline(void);
-string *split(int *num_commands, string line, string delimeter);
-void handle(int num_commands, string *args, string argv[]);
+string *split(string line, string delimeter);
+void handle(string *args, string argv[]);
 int run(string *args, string argv[]);
 int execute(string *args, string argv[]);
 
