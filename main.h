@@ -30,10 +30,12 @@ void print(string str);
 void prompt(void);
 
 void loop(int argc, string argv[]);
+void nonterminal(string line, string argv[]);
 string _getline(void);
 string *split(int *num_commands, string line, string delimeter);
-int run(string *args);
-int execute(string *args);
+void handle(int num_commands, string *args, string argv[]);
+int run(string *args, string argv[]);
+int execute(string *args, string argv[]);
 
 string location(char *command);
 
@@ -49,6 +51,7 @@ string _strstr(const char *haystack, const char *needle);
 int _strncmp(const char *str1, const char *str2, size_t n);
 string _strcpy(char *dest, const char *src);
 char *_strcat(char *dest, const char *src);
+string _strncat(char *dest, const char *src, size_t n);
 char *_strchr(const char *str, char character);
 string _strtok(char *str, const char *delim);
 char *_strdup(const char *str);

@@ -1,32 +1,37 @@
 #include "main.h"
 
-int run(string *args)
+int run(string *args, string argv[])
 {
 	pid_t pid;
 	int status;
 	string command = location(args[0]);
 
-	pid = fork();
-
-	if (pid == 0)
+	if (command != NULL)
 	{
-		if (execve(command, args, environ) == -1)
+		pid = fork();
+
+		if (pid == 0)
 		{
-			perror("SeaShell");
+			if (execve(command, args, environ) == -1)
+			{
+				perror(argv[0]);
+				return (false);
+			}
+		}
+		else if (pid < 0)
+		{
+			perror(argv[0]);
 			return (false);
 		}
-	}
-	else if (pid < 0)
-	{
-		perror("SeaShell");
-		return (false);
-	}
-	else
-	{
-		do
+		else
 		{
-			waitpid(pid, &status, WUNTRACED);
-		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
+			do
+			{
+				waitpid(pid, &status, WUNTRACED);
+			} while (!WIFEXITED(status) && !WIFSIGNALED(status));
+		}
+		return (true);
 	}
-	return (true);
+	perror(argv[0]);
+	return (false);
 }

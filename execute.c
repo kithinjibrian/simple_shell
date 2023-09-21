@@ -1,6 +1,6 @@
 #include "main.h"
 
-int execute(string *args)
+int execute(string *args, string argv[])
 {
 	Builtin builtin;
 	builtin = builtins(args[0]);
@@ -9,5 +9,5 @@ int execute(string *args)
 		builtin(args);
 		return (true);
 	}
-	return (run(args));
+	return (run(args, argv));
 }
