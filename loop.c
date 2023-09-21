@@ -7,16 +7,20 @@ void loop(int argc, string argv[])
 	int num_commands;
 	string line;
 	string *args;
+	(void)argc;
+	(void)argv;
+
 	do
 	{
+		int i, y;
 		line = _getline();
 		args = split(&num_commands, line, ";");
 
-		for (int i = 0; i < num_commands; i++)
+		for (i = 0; i < num_commands; i++)
 		{
 			int nn;
 			string *snn = split(&nn, args[i], "&&||");
-			for (int y = 0; y < nn; y++)
+			for (y = 0; y < nn; y++)
 			{
 				int a;
 				string *s = split(&a, snn[y], " ");
@@ -39,6 +43,7 @@ void loop(int argc, string argv[])
 					}
 				}
 			}
+			free(snn);
 		}
 
 		free(line);

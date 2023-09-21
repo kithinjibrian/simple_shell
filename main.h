@@ -24,7 +24,9 @@ typedef struct BuiltinCmds
 	Builtin fn;
 } BuiltinCmds;
 
-extern char *environ;
+extern char **environ;
+
+void print(string str);
 
 void loop(int argc, string argv[]);
 string _getline(void);
@@ -36,5 +38,8 @@ string location(char *command);
 
 void (*builtins(string cmd))(string *);
 void ss_exit(string *args);
+void ss_env(string *args);
+void ss_clear(string *args);
+void ss_setenv(string *args);
 
 #endif

@@ -14,19 +14,20 @@ bool isDelimiter(char c, const char *delimeters)
 char **str_tok(const char *input, const char *delimiters, int *tokenCount)
 {
 	int tokenCapacity = 10;
+	bool inToken = false;
+	char token[100];
+	int tokenIndex = 0;
+	int i;
 	char **tokens = (char **)malloc(tokenCapacity * sizeof(char *));
+
+	*tokenCount = 0;
 	if (tokens == NULL)
 	{
 		perror("Memory allocation error");
 		exit(EXIT_FAILURE);
 	}
 
-	bool inToken = false;
-	char token[100];
-	int tokenIndex = 0;
-	*tokenCount = 0;
-
-	for (int i = 0; input[i] != '\0'; i++)
+	for (i = 0; input[i] != '\0'; i++)
 	{
 		if (isDelimiter(input[i], delimiters))
 		{

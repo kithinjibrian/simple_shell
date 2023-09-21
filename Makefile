@@ -23,4 +23,6 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -I$(INCLUDE_DIR) -c $< -o $@
 
 clean:
-	rm -rf $(BUILD_DIR) $(EXECUTABLE)
+	rm -rf $(BUILD_DIR)
+
+.PHONY: clean
